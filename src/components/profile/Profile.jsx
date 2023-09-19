@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../constants";
 
 const Profile = () =>{
   const [user,setUser] = useState(null)
   useEffect(()=>{
   const token = localStorage.getItem('accessToken')
-  axios.get('http://localhost:3001/api/v1/me', { headers: {'Content-Type' :'application/json', 'Authorization': `Bearer ${token}`}})
+  axios.get(`${API_URL}/me`, { headers: {'Content-Type' :'application/json', 'Authorization': `Bearer ${token}`}})
   .then((res) => {
-    debugger
     setUser(res.data)
   })
 },[])

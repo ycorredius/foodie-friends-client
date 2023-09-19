@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { API_URL } from "../../constants";
 
 function RecipeForm() {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ function RecipeForm() {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    await axios.post("http://localhost:3001/recipes", data)
+    await axios.post(`${API_URL}/recipes`, data)
           .then((res) => {
             console.log(res);
           })

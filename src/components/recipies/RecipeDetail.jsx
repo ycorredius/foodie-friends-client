@@ -1,7 +1,7 @@
 import { useEffect,  useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { defaultImage } from "../../constants";
+import { API_URL, defaultImage } from "../../constants";
 //BUG: Whenever a user logs out and logs back in clicks on show recipe. current user state shows as undefines.
 // it then works when you refersh.
 
@@ -11,7 +11,7 @@ export default function RecipeDetail () {
   const { id } = useParams();
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://localhost:3001/api/v1/recipes/${id}`);
+      const result = await axios.get(`${API_URL}/recipes/${id}`);
       console.log(result.data.data);
       setRecipe(result.data.data);
     };

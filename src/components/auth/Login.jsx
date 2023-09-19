@@ -2,6 +2,7 @@ import {useForm} from 'react-hook-form'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { API_URL } from '../../constants'
 
 export default function Login () {
   const {register, handleSubmit, formState:{errors}} = useForm()
@@ -11,7 +12,7 @@ export default function Login () {
 
   const onSubmit = (data) => {
    const {email, password} = data
-    axios.post('http://localhost:3001/api/v1/auths',{email: email, password: password} )
+    axios.post(`${API_URL}/auths`,{email: email, password: password} )
     .then((res) => {
       if (res.status === 200 && res.statusText === "OK") {
         localStorage.setItem('accessToken', res.data.token)

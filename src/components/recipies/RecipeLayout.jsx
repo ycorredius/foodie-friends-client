@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../constants";
 
 export default function RecipeLayout() {
   const navigate = useNavigate()
@@ -15,7 +16,7 @@ export default function RecipeLayout() {
   }, [])
   const logout = async () => {
     const token = localStorage.getItem('accessToken')
-   await axios.delete('http://localhost:3001/api/v1/auths', { headers: {'Content-Type' :'application/json', 'Authorization': `Bearer ${token}`}})
+   await axios.delete(`${API_URL}/auths`, { headers: {'Content-Type' :'application/json', 'Authorization': `Bearer ${token}`}})
           .then((res) => {
             if (res.status === 200 && res.statusText === "OK") {
               localStorage.removeItem('accessToken')
