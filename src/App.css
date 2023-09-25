@@ -3,7 +3,13 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #FFF2D7;
 }
+
+
 
 .logo {
   height: 6em;

@@ -1,32 +1,27 @@
-import {Link} from 'react-router-dom'
-import { defaultImage } from '../../constants'
+import { Link } from "react-router-dom";
+import { defaultImage } from "../../constants";
 
-const RecipeCard = ({recipe}) =>{
-  const {id} = recipe.attributes
-  const{name, avatar} = recipe.attributes
+const RecipeCard = ({ recipe }) => {
+  const { id, name, avatar } = recipe;
 
   return (
-    <div>
-      <div className="container w-full max-w-xs p-4 mb-4">
-        <div className="flex flex-col justify-center items-center">
-          <div className="bg-gray-500">
-            <div className="flex flex-col place-items-center">
-              <img src={avatar == null ? defaultImage : avatar} alt={name}  />
-              <p className="text-xl"> Name: {name}</p>
-              <Link to={`/recipes/${id}`}>
-                <button
-                  className="bg-blue-dark hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline items-center"
-                  data-target={id}
-                >
-                  Show Recipe
-                </button>
-              </Link>
-            </div>
-          </div>
+    <li className="relative bg-[#FFFFF0] lg:p-4 drop-shadow-lg rounded-md">
+      <Link to={`/recipes/${id}`}>
+        <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
+          <img
+            src={avatar == null ? defaultImage : avatar}
+            alt={name}
+            className="pointer-events-none object-cover group-hover:opacity-75"
+          />
+          <span className="sr-only">{name}</span>
         </div>
-      </div>
-    </div>
+        <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">
+          {name}
+        </p>
+        <p className="pointer-events-none block text-sm font-medium text-gray-500"></p>
+      </Link>
+    </li>
   );
-}
+};
 
 export default RecipeCard;
