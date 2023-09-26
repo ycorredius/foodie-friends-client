@@ -12,13 +12,14 @@ export default function Recipes() {
     const fetchData = async () => {
       try {
         const result = await axios.get(`${API_URL}/recipes`);
-        setRecipes(result.data);
+        setRecipes(result.data.data);
       } catch (err) {
         console.log("Some error occurred", err);
       }
     };
     fetchData();
   }, []);
+
   return (
     <div>
       <ul

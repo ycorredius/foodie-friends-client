@@ -14,7 +14,6 @@ export default function RecipeDetail() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`${API_URL}/recipes/${id}`);
-      console.log(result.data.data);
       setRecipe(result.data.data);
     };
     fetchData();
@@ -47,9 +46,15 @@ export default function RecipeDetail() {
           )}
         </div>
         <div className="flex flex-col justify-start items-start">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center py-4">
-            {recipe.attributes.name}
-          </h1>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">
+              {recipe.attributes.name}
+            </h1>
+            <p className="text-gray-600 text-sm">
+              by {recipe.attributes.user.first_name}{" "}
+              {recipe.attributes.user.last_name}
+            </p>
+          </div>
           <div className="justify-start items-start">
             <div className="flex flex-col items-start col-span-2 py-2">
               <h5 className="text-xl py-2 font-semibold">Categories</h5>

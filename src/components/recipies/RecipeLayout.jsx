@@ -33,12 +33,11 @@ export default function RecipeLayout() {
     }
   }, []);
   const logout = async () => {
-    const token = localStorage.getItem("accessToken");
     await axios
       .delete(`${API_URL}/auths`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
@@ -57,8 +56,8 @@ export default function RecipeLayout() {
       <nav id="main-nav" className="flex justify-between m-4">
         <div></div>
         <div className="flex justify-around">
-          <NavLink to="/recipes" className="nav-link">
-            Recipes
+          <NavLink to="/" className="text-xl">
+            Foodie Friends
           </NavLink>
         </div>
         <div>
