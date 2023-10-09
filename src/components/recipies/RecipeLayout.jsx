@@ -12,6 +12,7 @@ export default function RecipeLayout() {
 
   useEffect(() => {
     async function FetchUser() {
+      try{
       await axios
         .get(`${API_URL}/me`, {
           headers: {
@@ -20,10 +21,17 @@ export default function RecipeLayout() {
           },
         })
         .then((res) => {
+          console.log(`Error code: ${res.status}`)
           if (res.status === 200 && res.statusText === "OK") {
             setUser(res.data);
           }
         });
+      } catch(error){
+        if(error.response.status === 401){
+          localStorage.removeItem("accessToken")
+          setAccessToken(!accessToken)
+        }
+      }
     }
     if (localStorage.getItem("accessToken")) {
       setAccessToken(true);
@@ -31,13 +39,13 @@ export default function RecipeLayout() {
     } else {
       setAccessToken(false);
     }
-  }, []);
+  }, [accessToken]);
   const logout = async () => {
     await axios
       .delete(`${API_URL}/auths`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((res) => {
